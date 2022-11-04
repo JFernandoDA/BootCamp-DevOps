@@ -66,9 +66,9 @@ docker network create lemoncode-challenge
 
 - Ejecutar la imagen front-end creada en el paso anterior
   ```bash
-    docker run -d -p 8080:3000 --name front-end --network lemoncode-challenge -e  front-end
-  ```
+    docker run -d -p 8080:3000 --name front-end --network lemoncode-challenge -e API_URI=http://topics-api:5000/api/topics front-end_image
 
+  ```  
 
 
 ## Ejercicio 2
