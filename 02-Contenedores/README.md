@@ -8,10 +8,10 @@
 docker network create lemoncode-challenge
 ```
 
-### Contenedor MongoDB
-
-- Crear el contenedor con el mongoDB
+### Crear el contenedor MongoDB
+```bash
     docker run -d --name some-mongo -p 27017:27017 --network lemoncode-challenge -v my-data:/data/db mongo
+```
 
 ### Contenedor backend
 - Se cambia en el fichero backend/appsettings.json
@@ -48,18 +48,26 @@ docker network create lemoncode-challenge
 ```
 
 - Creamos la imagen para el contenedor de backend a partir del dockerfile
+```bash
     docker build . --tag backend_image
+```
 
 - Creamos dicho contenedor
+```bash
     docker run -d --name topics-api --network lemoncode-challenge backend_image
+```
 
 
 ### Contenedor frontend
 - Construir la imágen a partir del dockerFile de frontEnd
+  ```bash
     docker build . --tag front-end_image
+  ```
 
 - Ejecutar la imagen front-end creada en el paso anterior
+  ```bash
     docker run -d -p 8080:3000 --name front-end --network lemoncode-challenge -e  front-end
+  ```
 
 
 
