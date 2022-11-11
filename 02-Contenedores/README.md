@@ -73,6 +73,8 @@ docker network create lemoncode-challenge
 
 ## Ejercicio 2
 
+Se crea el fichero `docker-compose.yml` en el raíz de la aplicación con el siguiente contenido:
+
 ```yml
 {
 version: '3.9'
@@ -114,6 +116,8 @@ volumes:
 ```
 
 ### Comandos docker-compose
+
+Estos comando se ejecutan desde el raíz de nuestra aplicación.
 
 · Crear los contenedores a partir de los dockerFiles
 
