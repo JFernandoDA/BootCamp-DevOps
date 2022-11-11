@@ -75,6 +75,72 @@ docker network create lemoncode-challenge
 
 ```yml
 {
-    
+version: '3.9'
+services:
+  front-end:
+    build: 
+      context: ./frontend
+    container_name: front-end
+    ports:
+      - 8080:3000
+    environment:
+      - API_URI=http://topics-api:5000/api/topics
+    networks:
+      - lemoncode-challenge
+    depends_on:
+      - topics-api
+  topics-api:
+    build: 
+      context: ./backend
+    container_name: topics-api
+    networks:
+      - lemoncode-challenge
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo:latest
+    container_name: some-mongo
+    ports:
+      - 27017:27017
+    networks:
+      - lemoncode-challenge
+    volumes:
+      - my-data:/data/db mongo
+networks:
+  lemoncode-challenge:
+volumes:
+  my-data:
 }
+```
+
+### Comandos docker-compose
+
+· Crear los contenedores a partir de los dockerFiles
+
+```bash
+  docker-compose up -d
+```
+
+· Parar los contenedores
+
+```bash
+  docker-compose stop
+```
+
+· Volver a arrancar los contenedores
+
+```bash
+  docker-compose start
+```
+
+· Reiniciar los contenedores
+
+```bash
+  docker-compose restart
+```
+
+· Borrar los contendores
+
+```bash
+  docker-compose down -v
 ```
