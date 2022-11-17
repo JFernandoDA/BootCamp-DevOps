@@ -7,7 +7,7 @@ cd dummy
 if (( $# >= 1)); then
   echo $1 > file1.txt
 else
-  echo 'Me encanta la bash!!' > file1.txt
+  echo 'Que me gusta la bash!!!!' > file1.txt
 fi
 > file2.txt
 cat file1.txt > file2.txt

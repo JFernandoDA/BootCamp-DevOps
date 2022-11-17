@@ -71,7 +71,7 @@ cd dummy
 if (( $# >= 1)); then
   echo $1 > file1.txt
 else
-  echo 'Me encanta la bash!!' > file1.txt
+  echo 'Que me gusta la bash!!!!' > file1.txt
 fi
 > file2.txt
 cat file1.txt > file2.txt
@@ -88,4 +88,78 @@ O bien si no le pasamos ningún parámetro pondrá por defecto el texto  `Me enc
 
 ```bash
 bash ejercicio3.sh
+```
+
+## Ejercicio 4
+
+Lo primero creamos el fichero para contener el script de bash y le damos permisos de ejecución
+
+```bash
+$ touch ejercicio4.sh
+$ chmod +x ./ejercicio4.sh
+```
+
+Copiamos el seguiente contenido en el fichero ejercicio4.sh, podemos hacerlo de la misma forma que en el ejercicio anterior.
+
+```
+URL='https://google.es'
+TEXT=$(curl -s $URL )
+
+OCCURRENCES=$(echo "$TEXT" | grep -io "$1" | wc -l)
+
+if (( $OCCURRENCES == 0)); then
+  echo "No se ha encontrado la palabra \"$1\""
+else
+  echo "La palabra \"$1\" aparece $OCCURRENCES veces"
+  FIRST_OCCURRENCE=$(echo "$TEXT" | grep -no -i $1 | head -1 | cut -f1 -d:)
+  echo "Aparece por primera vez en la línea $FIRST_OCCURRENCE"
+fi
+```
+
+Por último ejecutamos el archivo ejercicio4.sh
+
+```bash
+bash ejercicio4.sh google
+```
+
+## Ejercicio 5
+
+Lo primero creamos el fichero para contener el script de bash y le damos permisos de ejecución
+
+```bash
+$ touch ejercicio5.sh
+$ chmod +x ./ejercicio5.sh
+```
+
+Copiamos el seguiente contenido en el fichero ejercicio4.sh, podemos hacerlo de la misma forma que en el ejercicio 3.
+
+```
+#$1 contiene la URL 
+#$2 contiene la palabra a buscar.
+
+if(($# != 2)); then
+  echo "Se necesitan únicamente dos parámetros para ejecutar este script"
+  exit 1
+fi
+
+TEXT=$(curl -s $1 )
+
+OCCURRENCES=$(echo "$TEXT" | grep -io "$2" | wc -l)
+
+if (( $OCCURRENCES == 0)); then
+  echo "No se ha encontrado la palabra \"$2\""
+elif (($OCCURRENCES == 1));then
+  echo "La palabra \"$2\" aparece 1 sola vez"
+  FIRST_OCCURRENCE=$(echo "$TEXT" | grep -no -i $2 | head -1 | cut -f1 -d:)
+  echo "Aparece únicamente en la línea $FIRST_OCCURRENCE"
+else
+  echo "La palabra \"$2\" aparece $OCCURRENCES veces"
+  FIRST_OCCURRENCE=$(echo "$TEXT" | grep -no -i $2 | head -1 | cut -f1 -d:)
+  echo "Aparece por primera vez en la línea $FIRST_OCCURRENCE"
+fi
+```
+Por último ejecutamos el archivo ejercicio4.sh
+
+```bash
+bash ejercicio5.sh https://www.google.es google
 ```
